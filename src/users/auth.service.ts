@@ -8,7 +8,7 @@ import { UsersService } from './users.service';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'util';
 
-const scrypt = promisify(_scrypt);
+export const scrypt = promisify(_scrypt);
 
 @Injectable()
 export class AuthService {
