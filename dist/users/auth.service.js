@@ -21,11 +21,13 @@ let AuthService = class AuthService {
     }
     async signup(email, password) {
         const user = await this.usersService.find(email);
+        console.log(user);
         if (user.length)
             throw new common_1.BadRequestException('Email in use');
         const salt = (0, crypto_1.randomBytes)(8).toString('hex');
         const hash = (await (0, exports.scrypt)(password, salt, 32));
         const result = salt + '.' + hash.toString('hex');
+        console.log(user);
         return await this.usersService.create(email, result);
     }
     async signin(email, password) {

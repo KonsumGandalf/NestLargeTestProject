@@ -5,6 +5,6 @@ export const CurrentUserDecorator = createParamDecorator(
     // never DataType since this decorator needs no data
     const req = ctx.switchToHttp().getRequest();
     console.log(req.session.userId);
-    return 'hi there';
+    return req.session.userId;
   },
 );

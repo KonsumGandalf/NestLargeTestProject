@@ -16,6 +16,7 @@ export class AuthService {
 
   async signup(email: string, password: string) {
     const user: User[] = await this.usersService.find(email);
+    console.log(user);
     if (user.length) throw new BadRequestException('Email in use');
 
     // Generate Salt - 16 characters
@@ -28,11 +29,13 @@ export class AuthService {
     const result = salt + '.' + hash.toString('hex');
     /*console.log('Result: ', result);*/
 
+    console.log(user);
     // Create a new user
     return await this.usersService.create(email, result);
   }
 
   async signin(email: string, password: string) {
+    // @ts-ignore
     const [user] = await this.usersService.find(email);
     if (!user) throw new NotFoundException('no user was found');
     const [salt, storedHash] = user.password.split('.');

@@ -29,8 +29,8 @@ export class UsersController {
 
   @UseGuards(AuthGuard)
   @Get('whoami')
-  getSessionUser(@CurrentUserDecorator() user: string) {
-    return user;
+  async getSessionUser(@CurrentUserDecorator() user: number) {
+    return await this.findUser(user);
   }
 
   @Post('/signup')

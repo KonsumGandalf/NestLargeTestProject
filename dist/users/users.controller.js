@@ -27,8 +27,8 @@ let UsersController = class UsersController {
         this.usersService = usersService;
         this.authService = authService;
     }
-    getSessionUser(user) {
-        return user;
+    async getSessionUser(user) {
+        return await this.findUser(user);
     }
     async createUser(body, session) {
         const user = await this.authService.signup(body.email, body.password);
@@ -62,8 +62,8 @@ __decorate([
     (0, common_1.Get)('whoami'),
     __param(0, (0, current_user_decorator_1.CurrentUserDecorator)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
 ], UsersController.prototype, "getSessionUser", null);
 __decorate([
     (0, common_1.Post)('/signup'),

@@ -5,8 +5,10 @@ import {
   AfterInsert,
   AfterUpdate,
   AfterRemove,
+  OneToMany,
 } from 'typeorm';
 import { Exclude } from 'class-transformer';
+import { ReportEntity } from '../reports/entities/report.entity';
 
 export interface IUser {
   email: string;
@@ -18,11 +20,17 @@ export class User implements IUser {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ default: true })
+  admin: boolean;
+
   @Column()
   email: string;
 
   @Column()
   password: string;
+
+  @OneToMany(() => ReportEntity, (report) => report.user)
+  reports: ReportEntity[];
 
   @AfterInsert()
   logInsert() {
