@@ -14,12 +14,14 @@ const common_1 = require("@nestjs/common");
 const core_1 = require("@nestjs/core");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const queue_module_1 = require("./queue/queue.module");
 const report_entity_1 = require("./reports/entities/report.entity");
 const config_1 = require("@nestjs/config");
 const users_entity_1 = require("./users/users.entity");
 const users_module_1 = require("./users/users.module");
 const reports_module_1 = require("./reports/reports.module");
 const typeorm_1 = require("@nestjs/typeorm");
+const cron_module_1 = require("./cron/cron.module");
 const cookieSession = require('cookie-session');
 let AppModule = class AppModule {
     constructor(configService) {
@@ -53,6 +55,8 @@ AppModule = __decorate([
             }),
             users_module_1.UsersModule,
             reports_module_1.ReportsModule,
+            queue_module_1.QueueModule,
+            cron_module_1.CronModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [
@@ -60,7 +64,7 @@ AppModule = __decorate([
             {
                 provide: core_1.APP_PIPE,
                 useValue: new common_1.ValidationPipe({
-                    whitelist: true,
+                    whitelist: true
                 }),
             },
         ],

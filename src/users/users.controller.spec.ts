@@ -1,16 +1,16 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { AuthService } from "./auth.service";
-import { UsersController } from "./users.controller";
-import { User } from "./users.entity";
-import { UsersService } from "./users.service";
+import { Test, TestingModule } from '@nestjs/testing';
+import { AuthService } from './auth.service';
+import { UsersController } from './users.controller';
+import { User } from './users.entity';
+import { UsersService } from './users.service';
 
 const hardCodeUser = {
   id: 1,
-  email: "testUser@test.com",
-  password: "test123",
+  email: 'testUser@test.com',
+  password: 'test123',
 };
 
-describe("UsersController", () => {
+describe('UsersController', () => {
   let controller: UsersController;
   let fakeUsersService: Partial<UsersService>;
   let fakeAuthService: Partial<AuthService>;
@@ -66,22 +66,22 @@ describe("UsersController", () => {
     controller = module.get<UsersController>(UsersController);
   });
 
-  it("should be defined", () => {
+  it('should be defined', () => {
     expect(controller).toBeDefined();
   });
 
-  it("findAllUsers returns a list of users with the given email", async () => {
+  it('findAllUsers returns a list of users with the given email', async () => {
     const users = await controller.findAllUsers(hardCodeUser.email);
     expect(users.length).toEqual(1);
     expect(users[0].email).toEqual(hardCodeUser.email);
   });
 
-  it("findUser returns a user with a given id", async () => {
+  it('findUser returns a user with a given id', async () => {
     const user = controller.findUser(1);
     expect(user).toBeDefined();
   });
 
-  it("findUser throws an error if user with given id is not found.", async () => {
+  it('findUser throws an error if user with given id is not found.', async () => {
     fakeUsersService.findOne = () => null;
     try {
       await controller.findUser(100);
@@ -91,14 +91,14 @@ describe("UsersController", () => {
     }
   });
 
-  it("signin updates session object and returns user", async () => {
+  it('signin updates session object and returns user', async () => {
     const session = { userId: -10 };
     const user = await controller.signin(
       {
         email: hardCodeUser.email,
         password: hardCodeUser.password,
       },
-      session
+      session,
     );
 
     expect(user.id).toBe(1); //hardCodeUser.id
