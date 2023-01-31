@@ -21,6 +21,8 @@ jobs:
       - name: Conventional Commit Action
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3.7.1
+        with:
+          github_token: ${{ secrets.CHANGELOG_RELEASE }}
 
       - name: Create Release
         uses: actions/create-release@v1
