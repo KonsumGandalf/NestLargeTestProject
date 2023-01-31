@@ -22,7 +22,7 @@ jobs:
         id: changelog
         uses: TriPSs/conventional-changelog-action@v3.7.1
         with:
-          github-token: ${{ secrets.CHANGELOG_RELEASE }}
+          github-token: ${{ secrets.github_token }}
 
       - name: Create Release
         uses: actions/create-release@v1
